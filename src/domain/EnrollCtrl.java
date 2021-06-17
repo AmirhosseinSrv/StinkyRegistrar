@@ -13,15 +13,10 @@ public class EnrollCtrl {
                 throw new EnrollmentRulesViolationException(String.format("The student has already passed %s", o.getCourse().getName()));
             }
 			List<Course> prereqs = o.getCourse().getPrerequisites();
-			nextPre:
 			for (Course pre : prereqs) {
-                for (Map.Entry<Term, Map<Course, Double>> tr : transcript.entrySet()) {
-                    for (Map.Entry<Course, Double> r : tr.getValue().entrySet()) {
-                        if (r.getKey().equals(pre) && r.getValue() >= 10)
-                            continue nextPre;
-                    }
-				}
-				throw new EnrollmentRulesViolationException(String.format("The student has not passed %s as a prerequisite of %s", pre.getName(), o.getCourse().getName()));
+                if (!s.hasPassedCourse(pre)) {
+                    throw new EnrollmentRulesViolationException(String.format("The student has not passed %s as a prerequisite of %s", pre.getName(), o.getCourse().getName()));
+                }
 			}
             for (CSE o2 : courses) {
                 if (o == o2)
