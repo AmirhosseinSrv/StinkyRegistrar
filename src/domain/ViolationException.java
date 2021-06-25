@@ -9,12 +9,8 @@ public class ViolationException {
 		errors = new ArrayList<>();
 	}
 
-	public void addError(String error, int indentation) {
-		errors.add(error);
-	}
-
 	public void addError(String error) {
-		addError(error, 1);
+		errors.add(error);
 	}
 
 	public String toString() {
