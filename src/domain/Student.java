@@ -71,7 +71,7 @@ public class Student {
 		return name;
 	}
 
-	public boolean hasPassedCourse(Course course) throws EnrollmentRulesViolationException {
+	public boolean hasPassedCourse(Course course) {
 		for (Map.Entry<Term, Map<Course, Double>> tr : transcript.entrySet()) {
 			for (Map.Entry<Course, Double> r : tr.getValue().entrySet()) {
 				if (r.getKey().equals(course) && r.getValue() >= 10)
