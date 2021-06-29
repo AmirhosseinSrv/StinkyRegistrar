@@ -7,7 +7,6 @@ public class Course {
 	private String id;
 	private String name;
 	private int units;
-	
 	List<Course> prerequisites;
 
 	public Course(String id, String name, int units) {
@@ -17,13 +16,12 @@ public class Course {
 		prerequisites = new ArrayList<Course>();
 	}
 	
-	public void addPre(Course c) {
-		getPrerequisites().add(c);
+	public void addPrerequisite(Course c) {
+		prerequisites.add(c);
 	}
 
-	public Course withPre(Course... pres) {
+	public void addPrerequisites(Course... pres) {
 		prerequisites.addAll(Arrays.asList(pres));
-		return this;
 	}
 
 	public List<Course> getPrerequisites() {
