@@ -1,4 +1,6 @@
 package domain;
+import domain.exceptions.EnrollmentRulesViolationException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,7 +34,17 @@ public class Student {
 	    transcript.get(term).put(course, grade);
     }
 
-    public double getLastTermGPA() {
+    public boolean checkHasPassedCourse(Course course) {
+		for (Map.Entry<Term, Map<Course, Double>> tr : transcript.entrySet()) {
+			for (Map.Entry<Course, Double> r : tr.getValue().entrySet()) {
+				if (r.getKey().equals(course) && r.getValue() >= 10)
+					return true;
+			}
+		}
+		return false;
+	}
+
+    public double calculateGPA() {
 		double points = 0;
 		int totalUnits = 0;
 		for (Map.Entry<Term, Map<Course, Double>> tr : transcript.entrySet()) {
